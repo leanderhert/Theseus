@@ -66,7 +66,7 @@
   set page(
     paper: paper,
     header: context {
-      if counter(page).get().first() > 1 or header-show-on-first-page{
+      if counter(page).get().first() > 1 or header-show-on-first-page {
         header
       }
     },

@@ -1,3 +1,3 @@
-#import "template/header.typ"
-#import "template/thesis.typ"
-#import "template/title-setup.typ"
+#import "template/header.typ": header-content
+#import "template/thesis.typ": thesis
+#import "template/title-setup.typ": title-setup

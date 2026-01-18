@@ -1,6 +1,5 @@
 
 /// Header
-
 #let header-content(
   title,
   authors,
@@ -22,17 +21,16 @@
     column-gutter: column-gutter,
     row-gutter: row-gutter,
     /// left
-    context{
+    context {
       counter(page).get().first()
     },
     /// center
-    context{
-      
+    context {
       let n = counter(page).get().first()
-      if(calc.odd(n)){
+      if (calc.odd(n)) {
         title
       }
-      if(calc.even(n)){
+      if (calc.even(n)) {
         authors
       }
     },
@@ -41,6 +39,3 @@
   )
   return pad(top: padding-top, bottom: padding-bottom, header)
 }
-
-
-
