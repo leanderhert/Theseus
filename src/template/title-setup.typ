@@ -24,8 +24,8 @@
   date,
   date-size,
   inset: 1em,
-  gutter: 1em,
-  column-gutter: 7em,
+  gutter: 0.5em,
+  column-gutter: 4em,
 ) = {
   
   let info = author-emails
