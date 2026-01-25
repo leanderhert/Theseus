@@ -1,11 +1,51 @@
 #import "header.typ": header-content
 #import "title-setup.typ": title-setup
+#import "util.typ": is-some, to-string
+
+
+/// helper for surname
+#let surname(name) = {
+  let splitname = to-string(name).split()
+  return splitname.last()
+}
+
+/// helper for authors
+#let _handle_authors(authors) = {
+  if authors == none { return ((), none, none) }
+
+  if type(authors) != array { authors = (authors,) }
+
+  let author-names = authors.map(a => {
+    if type(a) == dictionary {
+      assert("name" in a, message: "Missing mandatory field `name`.")
+      [#a.name]
+    } else [#a]
+  })
+  let author-surnames = if author-names.len() > 1 { author-names.map(a => { surname(to-string(a)) }) } else if (
+    regex("\\s+") in to-string(author-names.last())
+  ) { to-string(author-names.last()).split().last() } else { author-names.first() }
+  let author-emails = authors.map(a => {
+    if type(a) == dictionary and "email" in a [#a.email]
+  })
+  let author-ids = authors.map(a => {
+    if type(a) == dictionary and "id" in a [#a.id]
+  })
+  let author-universitys = authors.map(a => {
+    if type(a) == dictionary and "university" in a [#a.university]
+  })
+
+  if author-emails.filter(is-some).len() == 0 { author-emails = none }
+  if author-ids.filter(is-some).len() == 0 { author-emails = none }
+  if author-universitys.filter(is-some).len() == 0 { author-universitys = none }
+
+  return (author-names,author-surnames, author-emails, author-ids, author-universitys)
+}
 
 /// Thesis setup
 #let thesis(
   title: none,
   title-style: t => [*#t*],
-  title-size: 1.6em,
+  title-size: 1.8em,
   course: none,
   course-size: 11pt,
   authors: none,
@@ -19,7 +59,6 @@
   paper: "a4",
   page-numbering: "1",
   header-title: none,
-  header-authors: none,
   header-show-on-first-page: false,
   header-extra-left: none,
   header-extra-center: none,
@@ -35,11 +74,13 @@
   supervisor: none,
   supervisor-size: 11pt,
   document,
-) = {
+) = context {
+  let (author-names, author-surnames, author-emails, author-ids, author-university) = _handle_authors(authors)
+
   // header
   let header = header-content(
     header-title,
-    header-authors,
+    author-surnames,
     header-show-on-first-page,
     header-extra-left,
     header-extra-center,
@@ -81,10 +122,12 @@
     title,
     title-style,
     title-size,
-    authors,
+    author-names,
     authors-size,
-    university,
+    author-university,
     university-size,
+    author-ids,
+    author-emails,
     supervisor,
     supervisor-size,
     course,

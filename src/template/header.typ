@@ -31,7 +31,7 @@
         title
       }
       if (calc.even(n)) {
-        authors
+        authors.join(", ")
       }
     },
     /// right

@@ -2,10 +2,21 @@
 
 #show: thesis.with(
   title: [A typst template for a thesis],
-  authors: [Rasmus Buurman, Leander Herter],
-  header-authors: [Buurman, Herter],
-  university: [University of Tübingen],
-  supervisor: [Kurt Gödel],
+  authors: (
+    (
+      name: "Rasmus Buurman", 
+      university: "University of Tübingen", 
+      email: "rasmus.buurman@student.uni-tuebingen.de", 
+      id: "666666",
+      ),
+    (
+      name: "Leander Herter", 
+      university: "University of Tübingen", 
+      email: "leander.herter@student.uni-tuebingen.de",
+      id: "6452375" 
+      ),
+    
+  ),
   header-title: [A template],
 )
 

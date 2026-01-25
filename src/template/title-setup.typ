@@ -1,3 +1,5 @@
+#import "util.typ": is-some
+
 
 /// helper function for the date
 #let default-date() = {
@@ -9,25 +11,46 @@
   title,
   title-style,
   title-size,
-  authors,
+  author-names,
   authors-size,
-  university,
+  author-universitys,
   university-size,
+  author-ids,
+  author-emails,
   supervisor,
   supervisor-size,
   course,
   course-size,
   date,
   date-size,
+  inset: 1em,
+  gutter: 1em,
+  column-gutter: 7em,
 ) = {
-  let setup-supervisor = [Supervised by ] + supervisor
+  
+  let info = author-emails
 
-  let setup-course = [Course: ] + course
+  for uni in author-universitys {
+    info.push(uni)
+  }
+  for id in author-ids {
+    info.push(id)
+  }
+  let entries = if(is-some(author-emails)) {
+    info
+  }
+
+  let info-box = block( inset: inset, grid(
+    columns: author-names.len(),
+    gutter: gutter,
+    column-gutter: column-gutter,
+    align: center,
+    ..entries,
+  ))
 
   let setup-date = if (date != none) {
     context date.display(default-date())
   }
-  let submission-date = [Submitted: ] + [#setup-date]
 
   let setup-title = context {
     v(10pt)
@@ -36,21 +59,10 @@
     ]
     v(10pt)
     text(authors-size)[
-      #authors
+      #author-names.join(", ")
     ]
     v(5pt)
-    if (university != none) {
-      text(university-size)[#university\ ]
-    }
-    if (course != none) {
-      text(course-size)[#setup-course\ ]
-    }
-    if (supervisor != none) {
-      text(supervisor-size)[#setup-supervisor\ ]
-    }
-    if (date != none) {
-      text(date-size)[#submission-date]
-    }
+    info-box
     v(10pt)
   }
   return setup-title
