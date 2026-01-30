@@ -1,4 +1,4 @@
-#import "../template/thesis.typ": thesis
+#import "../src/lib.typ": thesis
 
 #show: thesis.with(
   title: [A typst template for a thesis],
