@@ -1,4 +1,5 @@
-#import "../src/lib.typ": thesis
+// TODO: Replace with @preview
+#import "@local/theseus:0.1.0": thesis
 
 #show: thesis.with(
   title: [A typst template for a thesis],
