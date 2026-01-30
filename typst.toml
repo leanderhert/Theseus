@@ -15,4 +15,4 @@ keywords = ["thesis", "paper", "university", "seminar-paper"]
 
 [template]
 path = "template"
-entrypoint = "thesis.typ"
+entrypoint = "main.typ"
