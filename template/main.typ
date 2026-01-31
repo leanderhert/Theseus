@@ -1,27 +1,53 @@
 // TODO: Replace with @preview
-#import "@local/theseus:0.1.0": thesis
+#import "@local/theseus:0.1.0"
 
-#show: thesis.with(
-  title: [A typst template for a thesis],
-  authors: (
-    (
-      name: "Rasmus Buurman",
-      university: "University of Tübingen",
-      email: "rasmus.buurman@student.uni-tuebingen.de",
-      id: "666666",
-    ),
-    (
-      name: "Leander Herter",
-      university: "University of Tübingen",
-      email: "leander.herter@student.uni-tuebingen.de",
-      id: "6452375",
-    ),
-  ),
-  header-title: [A template],
+#import "metadata.typ" as meta
+
+#set document(
+  title: meta.title,
+  author: meta.author,
 )
 
+#set page(
+  paper: "a4",
+  numbering: none,
+)
+
+#set text(
+  font: "Libertinus Serif",
+  size: 12pt,
+)
+
+#set par(
+  justify: true,
+)
+
+#theseus.title.basic(
+  author: meta.author,
+  title: meta.title,
+  thesis-type-title: meta.thesis-type-title,
+  university: meta.university,
+  department: meta.department,
+  institute: meta.institute,
+  reviewer: (
+    name: meta.reviewer,
+    department: meta.reviewer-department,
+    university: meta.reviewer-university,
+  ),
+)
+
+#set page(
+  header: theseus.header.basic(
+    meta.title,
+    meta.author,
+    line: true,
+  ),
+)
+
+#set heading(numbering: "1.")
+
 = First Chapter
-#lorem(500)
+#lorem(100)
 
 = Second Chapter
 #lorem(300)

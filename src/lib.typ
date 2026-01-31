@@ -1,1 +1,2 @@
-#import "thesis.typ": thesis
+#import "title.typ"
+#import "header.typ"
