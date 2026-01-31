@@ -29,6 +29,7 @@
   university: meta.university,
   department: meta.department,
   institute: meta.institute,
+  submission-date: meta.submission-date,
   reviewer: (
     name: meta.reviewer,
     department: meta.reviewer-department,
