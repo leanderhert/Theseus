@@ -7,6 +7,6 @@
 #let student-id = "1234567"
 #let submission-date = [14\.07\.0700]
 #let period = [01\.04\.0700]
-#let reviewer = "Prof. D. Deadalus"
+#let reviewer = "Prof. D. Daedalus"
 #let reviewer-university = "University of Crete"
 #let reviewer-department = "Department of Architecture"
