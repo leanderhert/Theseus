@@ -21,9 +21,13 @@
       [#a.name]
     } else [#a]
   })
-  let author-surnames = if author-names.len() > 1 { author-names.map(a => { surname(to-string(a)) }) } else if (
+  let author-surnames = if author-names.len() > 1 {
+    author-names.map(a => { surname(to-string(a)) })
+  } else if (
     regex("\\s+") in to-string(author-names.last())
-  ) { to-string(author-names.last()).split().last() } else { author-names.first() }
+  ) { to-string(author-names.last()).split().last() } else {
+    author-names.first()
+  }
   let author-emails = authors.map(a => {
     if type(a) == dictionary and "email" in a [#a.email]
   })
@@ -38,7 +42,13 @@
   if author-ids.filter(is-some).len() == 0 { author-emails = none }
   if author-universitys.filter(is-some).len() == 0 { author-universitys = none }
 
-  return (author-names,author-surnames, author-emails, author-ids, author-universitys)
+  return (
+    author-names,
+    author-surnames,
+    author-emails,
+    author-ids,
+    author-universitys,
+  )
 }
 
 /// Thesis setup
@@ -75,7 +85,13 @@
   supervisor-size: 11pt,
   document,
 ) = context {
-  let (author-names, author-surnames, author-emails, author-ids, author-university) = _handle_authors(authors)
+  let (
+    author-names,
+    author-surnames,
+    author-emails,
+    author-ids,
+    author-university,
+  ) = _handle_authors(authors)
 
   // header
   let header = header-content(

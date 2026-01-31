@@ -27,7 +27,6 @@
   gutter: 0.5em,
   column-gutter: 4em,
 ) = {
-  
   let info = author-emails
 
   for uni in author-universitys {
@@ -36,11 +35,11 @@
   for id in author-ids {
     info.push(id)
   }
-  let entries = if(is-some(author-emails)) {
+  let entries = if (is-some(author-emails)) {
     info
   }
 
-  let info-box = block( inset: inset, grid(
+  let info-box = block(inset: inset, grid(
     columns: author-names.len(),
     gutter: gutter,
     column-gutter: column-gutter,
