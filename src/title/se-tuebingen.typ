@@ -1,21 +1,25 @@
-#let basic(
+#let se-tuebingen(
   thesis-type-title: "THESIS TYPE TITLE",
   title: "TITLE",
+  title-unformatted: auto,
   author: "AUTHOR",
   university: "UNIVERSITY",
   department: none,
   institute: none,
+  student-id: none,
   submission-date: none,
+  period: none,
   reviewer: none,
+  backside: auto,
 ) = {
-  set page(header: none, footer: none, margin: 0pt)
+  set page(header: none, footer: none, margin: (y: 0pt))
   show: align.with(center)
 
   v(8fr)
 
   grid(
     columns: 1,
-    row-gutter: 0.7em,
+    row-gutter: 1em,
     text(size: 2em, university),
     if department != none {
       text(size: 1.3em, department)
@@ -58,7 +62,7 @@
 
       grid(
         columns: 1,
-        row-gutter: 0.5em,
+        row-gutter: 0.7em,
         if r-name != none {
           text(size: 1.3em, r-name)
         },
@@ -73,6 +77,36 @@
   }
 
   v(8fr)
+
+  let backside = if backside == auto { false } else { backside }
+  if backside {
+    pagebreak(weak: true)
+
+    set page(margin: (x: 4cm))
+    set align(left)
+
+    v(1fr)
+
+    let title = if title-unformatted == auto { title } else {
+      title-unformatted
+    }
+    title = emph(title)
+    let author = if author != none [*#author:*]
+
+    author
+    linebreak()
+    student-id
+    linebreak()
+    title
+    linebreak()
+    thesis-type-title
+    linebreak()
+    university
+    linebreak()
+    period
+
+    v(4cm)
+  }
 
   pagebreak(weak: true)
 }

@@ -1,6 +1,6 @@
 #let thesis-type-title = "Bachelor Thesis"
 #let title = "On the Containment and Termination of the Minotaur"
-#let author = "Theseus of Crete"
+#let author = "Theseus of Athens"
 #let university = "University of Crete"
 #let department = "Department of Architecture"
 #let institute = "Institute for Labyrinths and Mazes"
