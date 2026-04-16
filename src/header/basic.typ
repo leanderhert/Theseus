@@ -1,34 +1,21 @@
 #let basic(
-  title,
-  authors,
   padding-top: 0.2em,
   padding-bottom: 0.2em,
+  alignment: left,
   line: false,
+  ..contents,
 ) = {
+  assert(contents.named().len() == 0, message: "Unexpected named argument")
+
   let header = {
-    grid(
-      columns: (1fr, 5fr),
-      align: (left, right),
+    set align(alignment)
 
-      // left
-      context counter(page).get().first(),
+    contents.pos().join(h(1fr))
 
-      // right
-      context {
-        let n = counter(page).get().first()
-        if (calc.odd(n)) {
-          title
-        } else {
-          let authors = if type(authors) != array {
-            (authors,)
-          } else { authors }
-          authors.join(", ")
-        }
-      },
-    )
-    // optional line
-    v(-0.8em)
-    if line { std.line(length: 100%, stroke: black) }
+    if line {
+      v(-0.8em)
+      std.line(length: 100%, stroke: black)
+    }
   }
 
   pad(top: padding-top, bottom: padding-bottom, header)

@@ -10,7 +10,6 @@
 
 #set page(
   paper: "a4",
-  numbering: none,
 )
 
 #set text(
